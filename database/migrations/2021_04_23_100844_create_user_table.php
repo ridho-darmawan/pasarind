@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMasterMerkMobilTable extends Migration
+class CreateUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateMasterMerkMobilTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_merk_mobil', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
-            $table->string('nama');
+        Schema::create('user', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('username');
+            $table->enum('role',['kasir','pelayan']);
+            $table->string('password');
             $table->timestamps();
-
         });
     }
 
@@ -28,6 +29,6 @@ class CreateMasterMerkMobilTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_merk_mobil');
+        Schema::dropIfExists('user');
     }
 }

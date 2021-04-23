@@ -45,7 +45,7 @@ class JwtMiddleware
                 "code"=>400,
             ], 400);
         }
-        $user = User::find($credentials->sub->uuid);
+        $user = User::find($credentials->sub->id);
         // Now let's put the user in the request class so that you can grab it from there
         $request->auth = $user;
         return $next($request);

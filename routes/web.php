@@ -7,6 +7,33 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix'=>'api/v1'], function() use($router){  
 
+    $router->group(['prefix'=>'makanan'], function() use($router){
+        $router->get('/makanan','MakananController@index');
+        $router->post('/makanan/search','MakananController@index');
+        $router->post('/makanan','MakananController@store');
+        $router->patch('/makanan/{id}','MakananController@update');
+        $router->delete('/makanan/{id}','MakananController@destroy');
+        $router->get('/makanan/{id}','MakananController@show');
+        $router->get('/makanan-ready','MakananController@menuMakananReady');
+    });
+
+    $router->group(['prefix'=>'user'], function() use($router){
+        $router->post('/register','UserController@register');
+        $router->post('/login','UserController@login');
+    });
+
+    $router->group(['prefix'=>'pesanan'], function() use($router){     
+        $router->post('pesanan','PesananController@store');
+        $router->get('pesanan-aktif','PesananController@listPesananAktif');
+        $router->get('report','PesananController@reportPesanan');
+        $router->patch('pesanan/{id}','PesananController@updatePesanan');
+        $router->patch('status-pesanan/{id_pesanan}','PesananController@updateStatusPesanan');
+    });
+
+
+
+
+
     $router->get('upload-file/{folder}/{nama}', 'UploadFileController@get_file');
     $router->get('upload-file/{folder}/{nama}/hapus', 'UploadFileController@destroy_file');
     $router->post('upload-file/{folder}', 'UploadFileController@store');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMasterJenisBusTable extends Migration
+class CreateMakananTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateMasterJenisBusTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_jenis_bus', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+        Schema::create('makanan', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('nama');
+            $table->string('harga');
+            $table->enum('status',['ready','non ready'])->default('ready');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateMasterJenisBusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_jenis_bus');
+        Schema::dropIfExists('makanan');
     }
 }
